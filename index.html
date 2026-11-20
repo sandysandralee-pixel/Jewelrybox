@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="一个用于验证 GitHub Pages 发布效果的静态测试网页。">
+  <title>我的 GitHub Pages 测试页</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --card: rgba(255, 255, 255, 0.92);
+      --text: #172033;
+      --muted: #657089;
+      --primary: #5b5bd6;
+      --primary-dark: #4848b8;
+      --line: #e4e8f2;
+      --success: #16784a;
+      --success-bg: #e9f8f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 15%, rgba(91, 91, 214, 0.14), transparent 30%),
+        radial-gradient(circle at 88% 85%, rgba(63, 174, 146, 0.13), transparent 28%),
+        var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+    }
+
+    main {
+      width: min(760px, 100%);
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      box-shadow: 0 24px 70px rgba(36, 45, 80, 0.12);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+    }
+
+    .hero { padding: 54px 54px 36px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--success-bg);
+      color: var(--success);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #23a36d;
+      box-shadow: 0 0 0 4px rgba(35, 163, 109, 0.13);
+    }
+
+    h1 {
+      margin: 24px 0 16px;
+      font-size: clamp(34px, 7vw, 54px);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    h1 span { color: var(--primary); }
+
+    .intro {
+      max-width: 570px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    button, .secondary-action {
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 12px;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    button {
+      border: 0;
+      color: #fff;
+      background: var(--primary);
+    }
+
+    button:hover { background: var(--primary-dark); }
+
+    .secondary-action {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: #fff;
+      text-decoration: none;
+    }
+
+    button:hover, .secondary-action:hover { transform: translateY(-2px); }
+
+    #status {
+      min-height: 24px;
+      margin: 18px 0 0;
+      color: var(--primary-dark);
+      font-size: 14px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      background: rgba(248, 250, 253, 0.8);
+    }
+
+    .feature { padding: 26px 30px; }
+    .feature + .feature { border-left: 1px solid var(--line); }
+    .feature strong { display: block; margin-bottom: 7px; font-size: 15px; }
+    .feature span { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+    footer {
+      padding: 18px 30px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 16px; }
+      main { border-radius: 22px; }
+      .hero { padding: 36px 26px 28px; }
+      .features { grid-template-columns: 1fr; }
+      .feature { padding: 20px 26px; }
+      .feature + .feature { border-left: 0; border-top: 1px solid var(--line); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="badge"><span class="dot"></span>静态网页运行正常</div>
+      <h1>你好，这是我的<br><span>GitHub Pages</span> 测试页</h1>
+      <p class="intro">这个页面由 HTML、CSS 和 JavaScript 构成，无需后端或数据库。确认预览效果后，就可以发布到 GitHub Pages，获得一个公开访问网址。</p>
+      <div class="actions">
+        <button id="testButton" type="button">测试网页交互</button>
+        <a class="secondary-action" href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">查看 GitHub Pages</a>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="features" aria-label="网页特性">
+      <div class="feature">
+        <strong>响应式布局</strong>
+        <span>自动适配电脑、平板和手机屏幕。</span>
+      </div>
+      <div class="feature">
+        <strong>纯静态文件</strong>
+        <span>单个 HTML 文件即可直接部署。</span>
+      </div>
+      <div class="feature">
+        <strong>交互已验证</strong>
+        <span>点击按钮即可测试 JavaScript。</span>
+      </div>
+    </section>
+
+    <footer>GitHub Pages Test Page · 2026</footer>
+  </main>
+
+  <script>
+    const button = document.getElementById('testButton');
+    const status = document.getElementById('status');
+    let clicks = 0;
+
+    button.addEventListener('click', () => {
+      clicks += 1;
+      const time = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+      status.textContent = `交互测试成功，第 ${clicks} 次点击 · ${time}`;
+    });
+  </script>
+</body>
+</html>
